@@ -1,0 +1,94 @@
+<!-- model.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drone Spider - 3D Model Viewer</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/model.css">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">Drone Spider</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">
+            <i class="bi bi-house-door"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/missions">
+            <i class="bi bi-list"></i> Misiones
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/3dModel">
+            <i class="bi bi-box"></i> 3D Model
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 3D Model Viewer Container -->
+  <canvas id="canvas"></canvas>
+    <!-- Save Button -->
+    <button id="save-button" class="btn btn-primary">
+      <i class="fas fa-save"></i> Save Model
+    </button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector("#canvas") });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+  
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+  
+      camera.position.z = 5;
+  
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+  
+      animate();
+  
+      const exporter = new THREE.GLTFExporter();
+      const saveButton = document.getElementById("save-button");
+  
+      //Doesn't work but I have no idea why
+      saveButton.addEventListener("click", () => {
+        exporter.parse(scene, (gltf) => {
+          const blob = new Blob([JSON.stringify(gltf)], { type: "application/json" });
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = "model.gltf";
+          link.click();
+        });
+      });
+    </script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

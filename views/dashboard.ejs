@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drone Spider - Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Drone Spider</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">
+                        <i class="bi bi-house-door"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/missions">
+                        <i class="bi bi-list"></i> Misiones
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/3dModel">
+                        <i class="bi bi-box"></i> 3D Model
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 style="color: black;">Dashboard</h1>
+
+        <!-- Dummy Data and Statistics (Placeholder) -->
+        <div class="row mx-md-n5">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;">Total Misiones</h5>
+                        <p class="card-text" style="color: black;" id="totalMissions">Loading...</p>
+                        <div class="text-center">
+                            <canvas id="missionsPieChart" width="20" height="20"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title" style="color: black;">Misiones Completadas</h5>
+                    <ul id="completedMissionsList" style="color: black; list-style-type: none; padding: 0;"></ul>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;">Misiones en Progreso</h5>
+                        <ul id="inProgressMissionsList" style="color: black; list-style-type: none; padding: 0;"></ul>
+                      </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;">Misiones Pendientes</h5>
+                        <ul id="pendingMissionsList" class="pagination-list pagination " style="color: black; list-style-type: none; padding: 0;"></ul>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script src="/js/dashboard.js"></script>
+
+</body>
+
+</html>
